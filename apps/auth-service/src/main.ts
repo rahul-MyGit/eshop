@@ -6,7 +6,7 @@ const port = process.env.PORT ? Number(process.env.PORT) : 6001;
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send({ 'message': 'Hello API'});
+    res.send({ 'message': 'Hello from auth service'});
 });
 
 app.listen(port, host, () => {
