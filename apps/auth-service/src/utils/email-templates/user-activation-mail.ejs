@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eshop Account Verification</title>
+    <style>
+      /* Base styles */
+      body {
+        background-color: #f5f6fa;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      .container {
+        max-width: 480px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+
+      .header {
+        background-color: #2563eb;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+        letter-spacing: 1px;
+      }
+
+      .content {
+        padding: 30px;
+        text-align: center;
+      }
+
+      .content h2 {
+        font-size: 22px;
+        color: #222;
+      }
+
+      .otp-box {
+        background: #f0f4ff;
+        display: inline-block;
+        padding: 12px 24px;
+        margin: 20px 0;
+        border-radius: 8px;
+        font-size: 28px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        color: #1d4ed8;
+      }
+
+      .footer {
+        background: #f9fafb;
+        text-align: center;
+        padding: 15px;
+        font-size: 13px;
+        color: #888;
+      }
+
+      .footer a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Eshop</h1>
+      </div>
+
+      <div class="content">
+        <h2>Your Account Verification Code</h2>
+        <p>Use the OTP below to verify your Eshop account:</p>
+
+        <div class="otp-box"><%= otp %></div>
+
+        <p>This code will expire in 10 minutes.<br />If you didn't request this, please ignore this email.</p>
+      </div>
+
+      <div class="footer">
+        <p>© <%= new Date().getFullYear() %> Eshop. All rights reserved.</p>
+        <p>
+          Need help? <a href="mailto:support@eshop.com">Contact Support</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

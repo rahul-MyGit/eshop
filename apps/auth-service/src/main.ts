@@ -2,6 +2,7 @@ import express from 'express';
 import cors from "cors"
 import { errorMiddleware } from '../../../packages/error-handler/error-middlware';
 import cookieParser from 'cookie-parser';
+import router from './routes/auth.routes';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(cookieParser())
 app.get('/', (req, res) => {
     res.send({ 'message': 'Hello from auth service'});
 });
+
+app.use("/api", router)
 
 app.use(errorMiddleware);
 
