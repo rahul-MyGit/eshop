@@ -14,4 +14,5 @@ export const userRegistration = async (req: Request, res: Response, next: NextFu
     }
 
     await checkOtpRestrictions(email, next);
+    await tracOtpRequest(email, next)
 }
