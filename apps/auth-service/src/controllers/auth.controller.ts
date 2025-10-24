@@ -8,7 +8,7 @@ export const userRegistration = async (req: Request, res: Response, next: NextFu
         validationRegistrationData(req.body, "user");
         const { name, email } = req.body
 
-        const existingUser = await prisma.user.findUnique({ where: email });
+        const existingUser = await prisma.users.findUnique({ where: email });
 
         if (existingUser) {
             return next(new ValidationError("User already existing with this email"))

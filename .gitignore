@@ -47,3 +47,5 @@ test-output
 
 /generated/prisma
 .env
+
+packages/libs/generated/
