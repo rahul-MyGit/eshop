@@ -38,7 +38,7 @@ export const tracOtpRequest = async (email: string, next: NextFunction) => {
     const otpRequestKey = `otp_request_count:${email}`;
     let otpRequests = parseInt((await redis.get(otpRequestKey)) || "0");
 
-    if (otpRequests >= 2) {
+    if (otpRequests > 2) {
         await redis.set(`otp_spam_lock:${email}`, "locked", "EX", 3600);
         return next(new ValidationError("Too many request, please wait 1hr before requesting again"))
     }
