@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import router from './routes/auth.routes';
 import swaggerUi from "swagger-ui-express";
 
-const swaggerDocument = require("./swagger-output.json")
+const swaggerDocument = require("../../../src/swagger-output.json")
 
 const app = express();
 
