@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { checkOtpRestrictions, sendOtp, tracOtpRequest, validationRegistrationData, verifyOtp } from "../utils/auth.helper";
+import { checkOtpRestrictions, handleForgetPassword, sendOtp, tracOtpRequest, validationRegistrationData, verifyForgetPsswordOtp, verifyOtp } from "../utils/auth.helper";
 import prisma from "../../../../packages/libs/prisma";
 import { AuthError, ValidationError } from "../../../../packages/error-handler";
 import bcrypt from "bcryptjs";
@@ -98,5 +98,45 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
     }
     catch (error) {
         return next(error);
+    }
+}
+
+//TODO: refresh-token controller
+
+export const userForgetPassword = async(req: Request, res: Response, next: NextFunction) => {
+    await handleForgetPassword(req, res, next, 'user');
+}
+
+export const verifyUserForgetPassword = async (req: Request, res: Response, next: NextFunction) => {
+    await verifyForgetPsswordOtp(req, res, next)
+}
+
+export const resetUserPassword = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const {email,newPassword} = req.body;
+        
+        if(!email || !newPassword){
+            return next(new ValidationError("Email and password is required"));
+        }
+
+        const user = await prisma.users.findUnique({where: {email}});
+        if(!user) return next(new ValidationError("User not found"));
+
+        const isSamePassword = await bcrypt.compare(newPassword, user.password!);
+        if(isSamePassword){
+            return next(new ValidationError("New password cannot be same as the old password"));
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword, 10);
+
+        await prisma.users.update({
+            where: {email},
+            data: {password: hashPassword}
+        });
+
+        res.status(200).json({message: "Password reset successfully"})
+
+    } catch (error) {
+        next(error)
     }
 }
